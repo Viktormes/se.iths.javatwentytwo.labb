@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -5,7 +6,7 @@ public class Labb {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        priceAndTime[]pricesAndTimes = new priceAndTime[24];
+        PriceAndTime[]pricesAndTimes = new PriceAndTime[24];
 
         while (true) {
             System.out.println();
@@ -16,11 +17,11 @@ public class Labb {
                 pricePerHour(sc, pricesAndTimes);
             }
             else if (choice.equals("2")) {
-                priceAndTime maxMax = getMaxPrice(pricesAndTimes);
-                priceAndTime minMin = getMinPrice(pricesAndTimes);
+                PriceAndTime maxMax = getMaxPrice(pricesAndTimes);
+                PriceAndTime minMin = getMinPrice(pricesAndTimes);
 
-                System.out.println("Billigast är det kl: " + minMin.getTime() + " " + minMin.getPrice() + " öre per kW/h");
-                System.out.println("Dyrast är det kl: " + maxMax.getTime() + " " + maxMax.getPrice() + " öre per kW/h");
+                System.out.println("Billigast är det kl:" + minMin.getTime() + "-" + (minMin.getTime()+1) + ", " + minMin.getPrice() + " öre per kW/h");
+                System.out.println("Dyrast är det kl:" + maxMax.getTime() + "-" + (maxMax.getTime()+1) + ", " + maxMax.getPrice() + " öre per kW/h");
                 System.out.format("Medelpriset är %.3f\n", avgPrice(pricesAndTimes));
 
             }
@@ -44,16 +45,18 @@ public class Labb {
         }
     }
 
-    private static void pricePerHour(Scanner sc, priceAndTime[] pricePerHourArr) {
+    private static void pricePerHour(Scanner sc, PriceAndTime[] pricePerHourArr) {
 
         for (int i = 0; i < 24; i++) {
-            System.out.println("Skriv in elpriset i hela ören för klockan: " + i );
-            pricePerHourArr[i] = new priceAndTime(i,sc.nextInt());
+            System.out.println("Skriv in elpriset i hela ören för klockan: " + i + "-" + (i+1) );
+            pricePerHourArr[i] = new PriceAndTime(i,sc.nextInt());
+
+
         }
     }
 
-    private static priceAndTime getMaxPrice(priceAndTime[] pricePerHourArr) {
-        priceAndTime maxPrice = new priceAndTime(0,0);
+    private static PriceAndTime getMaxPrice(PriceAndTime[] pricePerHourArr) {
+        PriceAndTime maxPrice = new PriceAndTime(0,0);
         for (int i = 0; i < pricePerHourArr.length ; i++) {
             if (pricePerHourArr[i].getPrice() > maxPrice.getPrice()){
                 maxPrice.setPrice(pricePerHourArr[i].getPrice());
@@ -62,19 +65,19 @@ public class Labb {
         }
         return maxPrice;
     }
-    private static priceAndTime getMinPrice(priceAndTime[] pricePerHourArr) {
+    private static PriceAndTime getMinPrice(PriceAndTime[] pricePerHourArr) {
 
-        priceAndTime minPrice = new priceAndTime(0,1000);
+        PriceAndTime minPrice = new PriceAndTime(0,1000);
 
         for (int i = 0; i < pricePerHourArr.length ; i++) {
-            if (i < minPrice.getPrice()) {
+            if (pricePerHourArr[i].getPrice() < minPrice.getPrice()) {
                 minPrice.setPrice(pricePerHourArr[i].getPrice());
                 minPrice.setTime(pricePerHourArr[i].getTime());
             }
         }
         return minPrice;
     }
-    private static double avgPrice(priceAndTime[] pricePerHourArr1) {
+    private static double avgPrice(PriceAndTime[] pricePerHourArr1) {
 
         double total = 0;
         for (int i = 0; i < pricePerHourArr1.length ; i++) {

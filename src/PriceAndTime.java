@@ -1,10 +1,10 @@
-public class priceAndTime {
+public class PriceAndTime {
 
 
     private int time;
     private int price;
 
-    public priceAndTime(int time, int price) {
+    public PriceAndTime(int time, int price) {
 
         this.time = time;
         this.price = price;
