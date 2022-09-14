@@ -9,6 +9,15 @@ public class PriceAndTime {
         this.time = time;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "PriceAndTime{" +
+                "time=" + time +
+                ", price=" + price +
+                '}';
+    }
+
     public int getPrice() {
         return this.price;
     }

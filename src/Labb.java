@@ -10,7 +10,7 @@ public class Labb {
 
         while (true) {
             System.out.println();
-            menyChoices();
+            menuChoices();
             String choice = sc.next();
 
             if (choice.equals("1")) {
@@ -27,8 +27,10 @@ public class Labb {
             }
             else if (choice.equals("3")) {
 
-
-
+                PriceAndTime[] sortedDeluxe = sortedPrices(pricesAndTimes);
+                for (int i = 0; i <sortedDeluxe.length; i++) {
+                    System.out.println("Kl:"+ sortedDeluxe[i].getTime() + "-" + (sortedDeluxe[i].getTime()+1)+ ", " + (sortedDeluxe[i].getPrice()) + " öre per kW/h");
+                }
 
             }
 
@@ -87,7 +89,29 @@ public class Labb {
         }
         return avg;
     }
-    private static void menyChoices() {
+
+    private static PriceAndTime[] sortedPrices(PriceAndTime[] pricePerHourArr){
+
+        PriceAndTime[] priceClone = Arrays.copyOf(pricePerHourArr, pricePerHourArr.length);
+
+        for (int i = 0; i <priceClone.length ; i++) {
+            for (int j = 0; j <priceClone.length; j++)
+                if (priceClone[i].getPrice() < priceClone[j].getPrice()){
+
+                    PriceAndTime temp = priceClone[i];
+                    priceClone[i] = priceClone[j];
+                    priceClone[j] = temp;
+
+
+                }
+           // System.out.println(pricePerHourArr[i].getTime() + "-" + (pricePerHourArr[i].getTime()+1) + " " + pricePerHourArr[i].getPrice());
+
+        }
+        return priceClone;
+
+
+    }
+    private static void menuChoices() {
         System.out.println("""
                 Elpriser
                 ======
