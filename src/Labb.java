@@ -51,8 +51,6 @@ public class Labb {
         for (int i = 0; i < 24; i++) {
             System.out.println("Skriv in elpriset i hela ören för klockan: " + i + "-" + (i + 1));
             pricePerHourArr[i] = new PriceAndTime(i, sc.nextInt());
-
-
         }
     }
 
@@ -104,13 +102,9 @@ public class Labb {
                     PriceAndTime temp = priceClone[i];
                     priceClone[i] = priceClone[j];
                     priceClone[j] = temp;
-
                 }
-
         }
         return priceClone;
-
-
     }
 
     private static void menuChoices() {
